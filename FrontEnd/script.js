@@ -28,7 +28,7 @@ fetch("http://localhost:5678/api/works")
 
         generateProjets(works)
 
-        
+
      //BOUTON TOUS //
      const boutonTous = document.querySelector(".btn-tous");
     
@@ -98,3 +98,4 @@ fetch("http://localhost:5678/api/works")
 
 
 });
+
