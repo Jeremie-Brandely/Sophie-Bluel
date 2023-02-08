@@ -169,7 +169,42 @@ margin: auto;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-input[type="submit"], button{
+#login {
+	width: 50%;
+margin: auto;
+}
+#login > * {
+	text-align: center;
+
+}
+#login h2{
+	margin-bottom: 20px;
+}
+#login form {
+	text-align: left;
+	margin-top:30px;
+	display: flex;
+	flex-direction: column;
+}
+
+#login input {
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+#login label {
+	margin: 2em 0 1em 0;
+}
+#login textarea {
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+
+
+
+input[type="submit"] {
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
@@ -186,3 +221,39 @@ footer nav ul {
 	margin: 2em
 }
 
+button {
+	font-family: 'Syne';
+	font-weight: 700;
+	border-radius: 60px ;
+	color: #1D6154;
+	border: 1px #1D6154 solid; 
+	text-align: center;
+	background-color: white;
+	padding-right: 15px;
+	padding-left: 15px;
+	height: 37px;
+	
+}
+
+button:hover {
+	background-color: #1D6154;
+	color: white;
+}
+
+.Filtres {
+	text-align: center;
+}
+
+.log {
+	font-weight: bold;
+}
+
+a:link {
+	text-decoration: none;
+}
+
+.mdp-oublie {
+	color: #1D6154;
+	font-weight: bold;
+	text-decoration: underline;
+}
