@@ -1,3 +1,33 @@
+
+// AFFICHER / RETIRER ELEMENTS LORS DE LA CONNEXION //
+const token = localStorage.getItem("token");
+if(token) {
+    document.getElementById("edite").style.display="block";
+    document.getElementById("login").style.display="none";
+    document.getElementById("logout").style.display="block";
+    document.getElementById("modif-intro").style.display="block";
+    document.getElementById("modif-projet").style.display="block";
+}
+
+const logout = document.getElementById("logout");
+logout.addEventListener("click", function() {
+    localStorage.removeItem("token")
+});
+
+//OUVERTURE MODALE//
+
+const modalContainer = document.querySelector(".modal-container");
+const modalTrigger = document.querySelectorAll(".modal-trigger");
+
+modalTrigger.forEach(trigger => trigger.addEventListener("click", toggleModal))
+
+function toggleModal(){
+    modalContainer.classList.toggle("active")
+}
+
+
+
+
 // RECUPERATION DES PROJETS ET AFFICHAGE //
 fetch("http://localhost:5678/api/works")
     .then(reponse => reponse.json())
@@ -24,10 +54,29 @@ fetch("http://localhost:5678/api/works")
                 workElement.appendChild(imageUrlElement);
                 workElement.appendChild(titleElement);
                
+        }};
+
+        function generateProjets(works) {
+            for (let i = 0; i < works.length; i++) {
+        
+                const article = works[i];
+                
+                const sectionModal = document.querySelector(".modal-contenu");
+                
+                const workElement = document.createElement("article");
+                
+                const imageUrlElement = document.createElement("img");
+                imageUrlElement.src = article.imageUrl;
+                
+                sectionModal.appendChild(workElement);
+                workElement.appendChild(imageUrlElement);
+            
+               
         }}
 
         generateProjets(works)
 
+        
 
      //BOUTON TOUS //
      const boutonTous = document.querySelector(".btn-tous");
