@@ -256,4 +256,185 @@ a:link {
 	color: #1D6154;
 	font-weight: bold;
 	text-decoration: underline;
+	
+}
+
+#edite {
+	display: none;
+	
+}
+
+ #contenu-edite {
+	background-color: black;
+	color: white;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	padding-top: 10px;
+	padding-bottom: 10px;
+ }
+
+ #contenu-edite h2{
+	color: white;
+	font-family: 'Work Sans';
+	font-weight: 400;
+	font-size: 13px;
+	margin-top:auto;
+	margin-bottom:auto;
+	margin-right: 10px;
+ }
+
+ #contenu-edite button{
+	color: black;
+	font-family: 'Work Sans';
+	font-weight: 500;
+	font-size: 13px;
+	margin-left: 10px;
+ }
+
+ #contenu-edite button:hover{
+	background-color: white;
+	color: black;
+ }
+
+ #error-message {
+	color: red;
+	text-decoration: underline;
+ }
+
+ #logout {
+	display: none;
+ }
+
+ #modif-intro {
+	display: none;
+	margin-left: 50px;
+ }
+
+ #modif-projet {
+	display: none;
+	margin-top: 10px;
+	margin-left: 20px;
+ }
+
+ .titre-projet {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+ }
+
+ .modal-btn{
+	border: none;
+	font-weight: 400;
+	cursor: pointer;
+	color: black;
+ }
+
+ .modal-btn:hover{
+	background-color: #FFF;
+	color: black;
+ }
+
+.modal-container {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background: rgba(0, 0, 0, 0.6);
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+}
+
+.modal-container.active{
+	display: block;
+}
+
+.modal {
+	padding: 40px;
+	background-color: #FFF;
+	width: 95%;
+	max-width: 550px;
+	min-width: 300px;
+	max-height: 600px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	display: flex;
+	flex-direction: column;
+	border-radius: 20px;
+}
+
+.modal img  {
+	width: 80px;
+	height: 100px;
+	display: flex;
+	flex-direction: row;
+	justify-content:space-around;
+	padding: 10px;
+}
+
+
+.close-modal-js {
+	cursor: pointer;
+	position: absolute;
+	background: white;
+	color: red;
+	border-color: white;
+	font-size: 24px;
+}
+
+#modalTitle{
+	font-size: 25px;
+	font-family: 'Work Sans';
+	font-weight: 400;
+	color: black;
+	margin-top: 20px;
+}
+
+.modal-contenu {
+	width: 550px;
+	margin: auto;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	padding-right: 5px;
+	padding-left: 5px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	overflow: hidden;
+	margin-top: 10px
+}
+
+.buttons-modal {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.add-modal {
+	width: 200px;
+	margin: auto;
+	margin-top: 20px;
+	margin-bottom: 10px;
+	cursor: pointer;
+}
+
+.delete-modal {
+	width: 200px;
+	margin: auto;
+	color: red;
+	background-color: white;
+	margin-top: 10px;
+	margin-bottom: 20px;
+	border: none;
+}
+
+.delete-modal:hover {
+	color: red;
+	background-color: white;
+	border: none;
+	cursor: pointer;
 }
