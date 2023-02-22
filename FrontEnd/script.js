@@ -25,7 +25,77 @@ function toggleModal(){
     modalContainer.classList.toggle("active")
 }
 
+// AFFICHER PROJETS MODALE//
+fetch("http://localhost:5678/api/works")
+    .then(reponse => reponse.json())
+    .then((works) => {
 
+        console.log(works);
+        function generateProjets(works) {
+            for (let i = 0; i < works.length; i++) {
+        
+                const article = works[i];
+                
+                const sectionModal = document.querySelector(".modal-contenu");
+                
+                const workElement = document.createElement("article");
+                
+                const imageUrlElement = document.createElement("img");
+                imageUrlElement.src = article.imageUrl;
+                imageUrlElement.classList.add("projets-modale")
+                
+                const divModale = document.createElement("div");
+                divModale.classList.add("corbeille-modale");
+
+                const imgCorbeille = document.createElement("img");
+                imgCorbeille.src = "./assets/images/Corbeille-Modale.png"
+
+                const edit = document.createElement("p");
+                edit.innerText = "éditer";
+
+                sectionModal.appendChild(workElement);
+                workElement.appendChild(imageUrlElement);
+                workElement.appendChild(divModale);
+                divModale.appendChild(imgCorbeille);
+                workElement.appendChild(edit);
+            
+               
+        }}
+        
+        generateProjets(works)
+    });
+
+    //SUPPRIMER UN PROJET//
+
+const btnCorbeille = document.getElementsByClassName("corbeille-modale");
+if(btnCorbeille) {
+    btnCorbeille.addEventListener("click", () => {
+        console.log("btn clicked");
+    });
+}
+
+btnCorbeille.addEventListener("click", function () {
+    e.preventDefault()
+
+    for (const workId of selectedWorks) {
+
+        const reponse = fetch("http://localhost:5678/api/works/${workId}", {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        if (reponse.ok) {
+            console.log("Projet ${workId} supprimé");
+
+        }else {
+            console.log("Erreur sur la suppresion du Projet ${workId}");
+        }
+        }
+    });
+
+
+//SUPPRIMER TOUS LES PROJETS//
 
 
 // RECUPERATION DES PROJETS ET AFFICHAGE //
@@ -56,25 +126,10 @@ fetch("http://localhost:5678/api/works")
                
         }};
 
-        function generateProjets(works) {
-            for (let i = 0; i < works.length; i++) {
-        
-                const article = works[i];
-                
-                const sectionModal = document.querySelector(".modal-contenu");
-                
-                const workElement = document.createElement("article");
-                
-                const imageUrlElement = document.createElement("img");
-                imageUrlElement.src = article.imageUrl;
-                
-                sectionModal.appendChild(workElement);
-                workElement.appendChild(imageUrlElement);
-            
-               
-        }}
+        generateProjets(works);
 
-        generateProjets(works)
+        
+        
 
         
 
