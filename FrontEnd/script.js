@@ -67,33 +67,35 @@ fetch("http://localhost:5678/api/works")
 
     //SUPPRIMER UN PROJET//
 
-const btnCorbeille = document.getElementsByClassName("corbeille-modale");
-if(btnCorbeille) {
-    btnCorbeille.addEventListener("click", () => {
+
+    const btnSupr = document.querySelectorAll(".corbeille-modale");
+
+    btnSupr.forEach(corbeille => {
+        corbeille.addEventListener("click", function (){
+    
+    corbeille.addEventListener("click", () => {
         console.log("btn clicked");
     });
-}
 
-btnCorbeille.addEventListener("click", function () {
-    e.preventDefault()
 
-    for (const workId of selectedWorks) {
-
-        const reponse = fetch("http://localhost:5678/api/works/${workId}", {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
-        if (reponse.ok) {
-            console.log("Projet ${workId} supprimé");
-
-        }else {
-            console.log("Erreur sur la suppresion du Projet ${workId}");
-        }
-        }
-    });
-
+    
+   
+    
+    function deleteWork() {
+        let work = document.getElementById("id").value;
+        console.log(id);
+    fetch("http://localhost:5678/api/works/${workId}", {
+        method:"DELETE",
+        body: null,
+        headers: {
+            "Content-type": "application/json; charset=UTF-8",
+        },
+        })
+        .then((reponse)=> reponse.json())
+        .then((json) => alert("le projet a bien été supprimé"));
+    }
+     });
+    })
 
 //SUPPRIMER TOUS LES PROJETS//
 
