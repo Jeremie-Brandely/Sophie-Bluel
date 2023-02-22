@@ -11,17 +11,18 @@
 	<link rel="stylesheet" href="./assets/style.css">
 	<script src="https://kit.fontawesome.com/f8a986a80c.js" crossorigin="anonymous"></script>
 	
+	
 </head>
 
+
+	
+<body>
 <div id="edite">
 	<div id="contenu-edite">
-		<h2><i class="fa-light fa-pen-to-square"></i>Mode édition<h2>
+		<h2><i class="fa-regular fa-pen-to-square"></i>Mode édition<h2>
 		<button>publier les changements</button>
 	</div>
 </div>
-	
-<body>
-
 <header>
 	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
@@ -38,7 +39,7 @@
 	<section id="introduction">
 		<figure>
 			<img src="./assets/images/sophie-bluel.png" alt="">
-			<div id="modif-intro"><p><i class="fa-light fa-pen-to-square"></i>modifier</p></div>
+			<div id="modif-intro"><p><i class="fa-regular fa-pen-to-square"></i></i></i>modifier</p></div>
 		</figure>
 		<article>
 			<h2>Designer d'espace</h2>
@@ -49,20 +50,20 @@
 	</section>
 	<section id="portfolio">
 		
-	<div class="titre-projet"><h2>Mes Projets</h2> <div id="modif-projet"><button class="modal-btn modal-trigger"><i class="fa-light fa-pen-to-square"></i>modifier</button></div> </div>
+	<div class="titre-projet"><h2>Mes Projets</h2> <div id="modif-projet"><button class="modal-btn modal-trigger"><i class="fa-regular fa-pen-to-square"></i></i>modifier</button></div> </div>
 		
 		<aside class="modal-container">
-		<div class="modal-trigger"></div>
+		<div class="overlay modal-trigger"></div>
 		<div class="modal" role="dialog" aria-labelledby="modalTitle">
 
 			<button class="close-modal-js modal-trigger">X</button>
 			<h2 id="modalTitle">Galerie Photo</h2>
-			<div class="modal-contenu modal-trigger">
+			<div class="modal-contenu">
 
 			</div>
 			<div class="buttons-modal">
 			<button class="add-modal">Ajouter une photo</button>
-			<button class="delete-modal">Supprimer la Galerie</button>
+			<button id="delete-modal">Supprimer la Galerie</button>
 			</div>
 		</div>
 		</aside>
