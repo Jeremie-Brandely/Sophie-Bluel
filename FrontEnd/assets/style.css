@@ -458,13 +458,12 @@ a:link {
 	position: absolute;
 	top: 13px;
 	right: 13px;
-	width: 14px;
 	text-align: center;
 	background-color: black;
 	padding: 4px;
 	border-radius: 4px;
-
 }
+
 
 .corbeille-modale img {
 	width: 10px;
