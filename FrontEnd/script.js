@@ -101,7 +101,7 @@ fetch("http://localhost:5678/api/works")
                         method:"DELETE",
                         headers: {
                             "Content-type": "application/json",
-                            "Authorization": "Bearer" + localStorage.getItem("token")
+                            "Authorization": "Bearer " + localStorage.getItem("token")
                         }
                 })
                         .then((reponse)=> reponse.json())
