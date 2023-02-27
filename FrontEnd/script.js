@@ -61,42 +61,66 @@ fetch("http://localhost:5678/api/works")
             
                
         }}
-        
+
+       /*  function deleteProjet() { 
+            var corb = document.getElementsByClassName("corbeille-modale");
+
+            for (var i = 0; i < corb.length; i++) { 
+                 
+                corb[i].addEventListener("click", function(e){
+                    console.log("btn clicked");
+
+                    e.preventDefault();
+                    console.log(e) 
+
+                    fetch("http://localhost:5678/api/works/${id}", {
+                        method:"DELETE",
+                        headers: {
+                            "Content-type": "application/json",
+                            "Authorization": "Bearer" + sessionStorage.getItem("token")
+                        }
+                        .then((reponse)=> reponse.json())
+                        .then((json) => alert("le projet a bien été supprimé"))
+                    })    
+                 });
+            }
+        } */
+
+        function deleteProjet() {
+
+            for (let i = 0; i < works.length; i++) {
+                var corb = document.getElementsByClassName("corbeille-modale");
+                
+                corb[i].addEventListener("click", function(e){
+                    console.log("btn clicked");
+                    console.log(works[i]);
+                    var id = works[i].id;
+                    console.log(localStorage.getItem("token"))
+                    e.preventDefault();
+                    fetch("http://localhost:5678/api/works/" + id, {
+                        method:"DELETE",
+                        headers: {
+                            "Content-type": "application/json",
+                            "Authorization": "Bearer" + localStorage.getItem("token")
+                        }
+                })
+                        .then((reponse)=> reponse.json())
+                        .then((json) => alert("le projet a bien été supprimé"))
+                      
+                })
+            }
+        }
         generateProjets(works)
+
+        deleteProjet() 
     });
 
     //SUPPRIMER UN PROJET//
 
-
-    const btnSupr = document.querySelectorAll(".corbeille-modale");
-
-    btnSupr.forEach(corbeille => {
-        corbeille.addEventListener("click", function (){
     
-    corbeille.addEventListener("click", () => {
-        console.log("btn clicked");
-    });
-
 
     
-   
-    
-    function deleteWork() {
-        let work = document.getElementById("id").value;
-        console.log(id);
-    fetch("http://localhost:5678/api/works/${workId}", {
-        method:"DELETE",
-        body: null,
-        headers: {
-            "Content-type": "application/json; charset=UTF-8",
-        },
-        })
-        .then((reponse)=> reponse.json())
-        .then((json) => alert("le projet a bien été supprimé"));
-    }
-     });
-    })
-
+ 
 //SUPPRIMER TOUS LES PROJETS//
 
 
