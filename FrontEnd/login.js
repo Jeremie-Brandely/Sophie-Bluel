@@ -1,11 +1,15 @@
 
+    
     document.querySelector("form").addEventListener("submit", function(event) {
         event.preventDefault();
     })
+
+
+
     // ECOUTER LE CLICK DU BOUTON //
 
     const loginBouton = document.querySelector(".login-button");
-    
+     console.log(document.getElementById("email"))
     
     loginBouton.addEventListener("click", function() {
         const email = document.getElementById("email").value;
@@ -18,13 +22,14 @@
             body: JSON.stringify({email: email, password: password}),
             headers: { "Content-Type" : "application/json" }
         })
-        .then((reponse) => reponse.json)
+        .then((reponse) => reponse.json())
         .then((data) => {
             console.log(data);
             
-            if(data) {
+            if(data.token) {
                 localStorage.setItem("userId", data.userId);
                 localStorage.setItem("token", data.token);
+                
                 window.location.href = "index.html";
             }else{
                 
