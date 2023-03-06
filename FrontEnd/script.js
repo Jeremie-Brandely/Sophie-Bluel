@@ -23,6 +23,7 @@ modalTrigger.forEach(trigger => trigger.addEventListener("click", toggleModal))
 
 function toggleModal(){
     modalContainer.classList.toggle("active")
+    
 }
 
 // AFFICHER PROJETS MODALE//
@@ -61,31 +62,7 @@ fetch("http://localhost:5678/api/works")
             
                
         }}
-
-       /*  function deleteProjet() { 
-            var corb = document.getElementsByClassName("corbeille-modale");
-
-            for (var i = 0; i < corb.length; i++) { 
-                 
-                corb[i].addEventListener("click", function(e){
-                    console.log("btn clicked");
-
-                    e.preventDefault();
-                    console.log(e) 
-
-                    fetch("http://localhost:5678/api/works/${id}", {
-                        method:"DELETE",
-                        headers: {
-                            "Content-type": "application/json",
-                            "Authorization": "Bearer" + sessionStorage.getItem("token")
-                        }
-                        .then((reponse)=> reponse.json())
-                        .then((json) => alert("le projet a bien été supprimé"))
-                    })    
-                 });
-            }
-        } */
-
+// SUPPRIME UN PROJET //
         function deleteProjet() {
 
             for (let i = 0; i < works.length; i++) {
@@ -110,18 +87,65 @@ fetch("http://localhost:5678/api/works")
                 })
             }
         }
-        generateProjets(works)
 
-        deleteProjet() 
-    });
+       
+// AJOUTER UN PROJET //
+        
+        function addProjet() {
+            
+            const ajout = document.getElementById("add-modal");
 
-    //SUPPRIMER UN PROJET//
+            ajout.addEventListener("click", function() {
+                document.getElementById("modal-rendu").style.display="none";
+                document.getElementById("modal-ajout").style.display="block";                
+            })
 
-    
+            const retour = document.getElementById("return-modal");
 
-    
- 
-//SUPPRIMER TOUS LES PROJETS//
+            retour.addEventListener("click", function() {
+                document.getElementById("modal-ajout").style.display="none";
+                document.getElementById("modal-rendu").style.display="block";
+            })
+
+            const submitLogin=document.querySelector("#projet-info")
+            submitLogin.addEventListener("submit", function(e){
+                e.preventDefault()
+                const image = document.querySelector("#getFile").files[0];
+                console.log(image)
+                const title = document.querySelector("#titre").value
+                const category = parseInt(document.querySelector("#categorie").value)
+
+                const formData = new FormData()
+                formData.append("image", image);
+                formData.append("title", title);
+                formData.append("category", category);
+                console.log(formData)
+                let reponse = fetch("http://localhost:5678/api/works", {
+                    method:"POST",
+                    headers: {
+                        "Authorization": "Bearer " + localStorage.getItem("token")
+                    },
+                    body : formData
+                })
+                    console.log(body)
+                    if (reponse.status === 201){
+                        console.log("Projet Envoyé");
+                    } else {
+                        console.log("Erreur");
+                    }
+            }
+            
+    )}
+
+
+                generateProjets(works)
+
+                deleteProjet() 
+
+                addProjet()
+
+            });
+
 
 
 // RECUPERATION DES PROJETS ET AFFICHAGE //
