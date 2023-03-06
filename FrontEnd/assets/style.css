@@ -367,11 +367,8 @@ a:link {
 .modal {
 	padding: 40px;
 	background-color: #FFF;
-	width: 95%;
-	max-width: 550px;
-	min-width: 300px;
-	max-height: 600px;
 	position: absolute;
+	min-width: 400px;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
@@ -399,9 +396,17 @@ a:link {
 	cursor: pointer;
 	position: absolute;
 	background: white;
-	color: red;
+	color: gray;
 	border-color: white;
 	font-size: 24px;
+	border: none;
+	right: 0;
+	margin-right: 20px;
+}
+
+.close-modal-js:hover {
+	background-color: white;
+	color: gray;
 }
 
 #modalTitle{
@@ -429,7 +434,7 @@ a:link {
 	flex-direction: column;
 }
 
-.add-modal {
+#add-modal {
 	width: 200px;
 	margin: auto;
 	margin-top: 20px;
@@ -437,7 +442,7 @@ a:link {
 	cursor: pointer;
 }
 
-#delete-modal {
+.delete-modal {
 	width: 200px;
 	margin: auto;
 	color: red;
@@ -447,7 +452,7 @@ a:link {
 	border: none;
 }
 
-#delete-modal:hover {
+.delete-modal:hover {
 	color: red;
 	background-color: white;
 	border: none;
@@ -473,4 +478,74 @@ a:link {
 
 article p {
 	margin-left: 10px;
+}
+
+
+
+.intro-ajout {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+#modal-ajout {
+	display: none;
+}
+
+#return-modal {
+	border: none;
+	color: gray;
+}
+#return-modal:hover {
+	background-color: white;
+	color: gray;
+}
+.close-modal {
+	color: gray;
+	border: none;
+}
+
+.close-modal:hover{
+	background-color: white;
+	color: gray;
+}
+
+.champs-projet {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	
+}
+
+#depop {
+	display: flex;
+	flex-direction: column;
+	
+}
+
+label{
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+#boutonPhoto {
+	display: flex;
+	align-items: center;
+}
+
+#imgPhoto {
+	display: flex;
+	align-items: center;
+}
+
+#depop {
+	background-color: #E8F1F6;
+	display: block;
+	flex-direction: column;
+	align-items: center;
+}
+
+#photoBtn {
+	display: flex;
+	width: 180px;
+	align-items: center;
 }
