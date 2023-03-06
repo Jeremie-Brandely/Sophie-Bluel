@@ -19,7 +19,7 @@
 <body>
 <div id="edite">
 	<div id="contenu-edite">
-		<h2><i class="fa-regular fa-pen-to-square"></i>Mode édition<h2>
+		<h2><i class="fa-regular fa-pen-to-square"></i> Mode édition<h2>
 		<button>publier les changements</button>
 	</div>
 </div>
@@ -39,7 +39,7 @@
 	<section id="introduction">
 		<figure>
 			<img src="./assets/images/sophie-bluel.png" alt="">
-			<div id="modif-intro"><p><i class="fa-regular fa-pen-to-square"></i></i></i>modifier</p></div>
+			<div id="modif-intro"><p><i class="fa-regular fa-pen-to-square"></i> modifier</p></div>
 		</figure>
 		<article>
 			<h2>Designer d'espace</h2>
@@ -50,23 +50,60 @@
 	</section>
 	<section id="portfolio">
 		
-	<div class="titre-projet"><h2>Mes Projets</h2> <div id="modif-projet"><button class="modal-btn modal-trigger"><i class="fa-regular fa-pen-to-square"></i></i>modifier</button></div> </div>
+	<div class="titre-projet"><h2>Mes Projets</h2> <div id="modif-projet"><button class="modal-btn modal-trigger"><i class="fa-regular fa-pen-to-square"></i> modifier</button></div> </div>
 		
 		<aside class="modal-container">
 		<div class="overlay modal-trigger"></div>
 		<div class="modal" role="dialog" aria-labelledby="modalTitle">
-
-			<button class="close-modal-js modal-trigger">X</button>
-			<h2 id="modalTitle">Galerie Photo</h2>
-			<div class="modal-contenu">
-
+			
+			<div id="modal-rendu">
+					<button class="close-modal-js modal-trigger">X</button>
+					<h2 id="modalTitle">Galerie Photo</h2>
+					<div class="modal-contenu"></div>
+					
+				<div class="buttons-modal">
+					<button id="add-modal">Ajouter une photo</button>
+					<button class="delete-modal">Supprimer la Galerie</button>
+				</div>
 			</div>
-			<div class="buttons-modal">
-			<button class="add-modal">Ajouter une photo</button>
-			<button id="delete-modal">Supprimer la Galerie</button>
+
+			<div id="modal-ajout">
+				<form enctype="multipart/form-data" method="post" id="projet_info">
+				<div class="intro-ajout">
+					<button id="return-modal"><i class="fa-solid fa-arrow-left"></i></button>
+					<h2>Ajout Photo</h2>
+					<button class="close-modal">X</button>
+				</div>
+					<div id="photo">
+						<img id="output" />
+						<div id="depop">
+							<img id="imgPhoto" src="./assets/" alt="photo" />
+							<button id="photoBtn">Ajouter une photo </button>
+							<input type="file" id="getFile"  accept="image/png, image/jpg" maxsize="4mo" required>
+							<label for ="getFile" id="labelPhoto">jpg, png: 4Mo max</label>
+						</div>
+					</div>
+					<div class="champs-projet">
+						<label for ="titre">Titre</label>
+						<input class="champs" type="text" name="titre" id="titre">
+						<label for ="categorie">Catégorie</label>
+						<select class="champs" name="categorie" id="categorie">
+							<option value="" selected disabled></option>
+							<option value=1>Objets</option>
+							<option value=2>Appartements</option>
+							<option value=3>Hôtels & Restaurants</option>
+						</select>
+					</div>
+					<input type="submit" value="Valider" id="boutonPhoto" >
+			
+				</form>
 			</div>
 		</div>
-		</aside>
+		</aside>	
+	</div>
+		
+
+		
 
 		<section class = "Filtres">
 			<button class="btn-tous">Tous</button>
