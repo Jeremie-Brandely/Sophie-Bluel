@@ -68,18 +68,17 @@
 			</div>
 
 			<div id="modal-ajout">
-				<form enctype="multipart/form-data" method="post" id="projet_info">
+				<form enctype="multipart/form-data" method="post" id="projet_info" url="/upload-picture">
 				<div class="intro-ajout">
 					<button id="return-modal"><i class="fa-solid fa-arrow-left"></i></button>
 					<h2>Ajout Photo</h2>
-					<button class="close-modal">X</button>
+					<button class="close-modal modal-trigger">X</button>
 				</div>
-					<div id="photo">
-						<img id="output" />
+					<div id="photo" >
+						<img id="affiche" />
 						<div id="depop">
 							<img id="imgPhoto" src="./assets/" alt="photo" />
-							<button id="photoBtn">Ajouter une photo </button>
-							<input type="file" id="getFile"  accept="image/png, image/jpg" maxsize="4mo" required>
+							<input type="file" name="picture" onchange="previewFile(this)" id="getFile" accept="image/png, image/jpg" maxsize="4mo" required>
 							<label for ="getFile" id="labelPhoto">jpg, png: 4Mo max</label>
 						</div>
 					</div>
