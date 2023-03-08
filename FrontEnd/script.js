@@ -88,6 +88,24 @@ fetch("http://localhost:5678/api/works")
             }
         }
 
+        // CHARGER IMAGE MODALE //
+       
+
+
+    const preview = document.getElementById("affiche");
+    var previewFile = function (e) {
+        const file = document.querySelector("input[type=file]").files[0];
+        const reader = new FileReader();
+        reader.addEventListener("load", function() {
+            preview.src = reader.result;
+            }, false);
+
+            if(file){
+                reader.readAsDataURL(file);
+ 
+        }
+        }
+
        
 // AJOUTER UN PROJET //
         
@@ -107,8 +125,8 @@ fetch("http://localhost:5678/api/works")
                 document.getElementById("modal-rendu").style.display="block";
             })
 
-            const submitLogin=document.querySelector("#projet-info")
-            submitLogin.addEventListener("submit", function(e){
+            const boutonPhoto=document.querySelector("#boutonPhoto")
+            boutonPhoto.addEventListener("click", function(e){
                 e.preventDefault()
                 const image = document.querySelector("#getFile").files[0];
                 console.log(image)
@@ -116,18 +134,25 @@ fetch("http://localhost:5678/api/works")
                 const category = parseInt(document.querySelector("#categorie").value)
 
                 const formData = new FormData()
-                formData.append("image", image);
-                formData.append("title", title);
-                formData.append("category", category);
+                formData.append("image", image)
+                formData.append("title", title)
+                formData.append("category", category)
                 console.log(formData)
-                let reponse = fetch("http://localhost:5678/api/works", {
+                
+                 let reponse = fetch("http://localhost:5678/api/works", {
                     method:"POST",
                     headers: {
                         "Authorization": "Bearer " + localStorage.getItem("token")
                     },
                     body : formData
+                }) 
+                .then((response) => response.json())
+                .then((result) => {
+                    console.log("Success:", result);
                 })
-                    console.log(body)
+                .catch((error) => {
+                    console.error("Error:", error);
+                });
                     if (reponse.status === 201){
                         console.log("Projet Envoyé");
                     } else {
@@ -143,6 +168,8 @@ fetch("http://localhost:5678/api/works")
                 deleteProjet() 
 
                 addProjet()
+
+                previewFile()
 
             });
 
