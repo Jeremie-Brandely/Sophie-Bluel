@@ -92,20 +92,18 @@ fetch("http://localhost:5678/api/works")
        
 
 
-    const preview = document.getElementById("affiche");
-    var previewFile = function (e) {
-        const file = document.querySelector("input[type=file]").files[0];
-        const reader = new FileReader();
-        reader.addEventListener("load", function() {
-            preview.src = reader.result;
-            }, false);
+  const file = document.getElementById("getFile");
+  const preview = document.getElementById("preview");
+  const depop = document.getElementById("depop");
 
-            if(file){
-                reader.readAsDataURL(file);
- 
-        }
-        }
+  file.addEventListener("change", function(e) {
+    const file = e.target.files[0];
 
+    const url = URL.createObjectURL(file);
+    preview.src = url;
+    depop.style.display="none";
+
+  })
        
 // AJOUTER UN PROJET //
         
@@ -169,7 +167,7 @@ fetch("http://localhost:5678/api/works")
 
                 addProjet()
 
-                previewFile()
+            
 
             });
 
