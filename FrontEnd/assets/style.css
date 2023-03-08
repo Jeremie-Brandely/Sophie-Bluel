@@ -534,7 +534,10 @@ label{
 
 #imgPhoto {
 	display: flex;
-	align-items: center;
+	width: 60px;
+	height: 60px;
+	margin: auto;
+	margin-top: 40px;
 }
 
 #depop {
@@ -548,4 +551,15 @@ label{
 	display: flex;
 	width: 180px;
 	align-items: center;
+}
+
+#preview {
+	width: 130px;
+	margin: auto;
+}
+
+#photo {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
