@@ -432,6 +432,10 @@ a:link {
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
+	width: 400px;
+	margin: auto;
+	border-top:  1px #B3B3B3 solid;
+	margin-top: 20px;
 }
 
 #add-modal {
@@ -513,13 +517,14 @@ article p {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	
+	margin: auto;
+	border-bottom:  1px #B3B3B3 solid;
+	padding-bottom: 30px;
 }
 
 #depop {
 	display: flex;
 	flex-direction: column;
-	
 }
 
 label{
@@ -530,14 +535,28 @@ label{
 #boutonPhoto {
 	display: flex;
 	align-items: center;
+	font-family: 'Syne';
+	font-weight: 700;
+	border-radius: 60px ;
+	color: #1D6154;
+	border: 1px #1D6154 solid; 
+	background-color: white;
+	padding-left: 60px;
+	height: 37px;
+}
+
+#boutonPhoto:hover {
+	color: white;
+	background-color: #1D6154;
+	border: 1px white solid; 
 }
 
 #imgPhoto {
 	display: flex;
-	width: 60px;
-	height: 60px;
+	width: 120px;
+	height: 90px;
 	margin: auto;
-	margin-top: 40px;
+	margin-top: 20px;
 }
 
 #depop {
@@ -563,3 +582,4 @@ label{
 	flex-direction: column;
 	justify-content: center;
 }
+
