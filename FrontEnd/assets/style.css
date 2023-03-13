@@ -583,3 +583,15 @@ label{
 	justify-content: center;
 }
 
+#getFile {
+	display: none;
+}
+
+#depop {
+	display: flex;
+	flex-direction: column;
+}
+
+#ajouter {
+	margin: 5px;
+}
