@@ -1,16 +1,15 @@
-
 // AFFICHER / RETIRER ELEMENTS LORS DE LA CONNEXION //
 const token = localStorage.getItem("token");
-if(token) {
-    document.getElementById("edite").style.display="block";
-    document.getElementById("login").style.display="none";
-    document.getElementById("logout").style.display="block";
-    document.getElementById("modif-intro").style.display="block";
-    document.getElementById("modif-projet").style.display="block";
+if (token) {
+    document.getElementById("edite").style.display = "block";
+    document.getElementById("login").style.display = "none";
+    document.getElementById("logout").style.display = "block";
+    document.getElementById("modif-intro").style.display = "block";
+    document.getElementById("modif-projet").style.display = "block";
 }
 
 const logout = document.getElementById("logout");
-logout.addEventListener("click", function() {
+logout.addEventListener("click", function () {
     localStorage.removeItem("token")
 });
 
@@ -21,9 +20,9 @@ const modalTrigger = document.querySelectorAll(".modal-trigger");
 
 modalTrigger.forEach(trigger => trigger.addEventListener("click", toggleModal))
 
-function toggleModal(){
+function toggleModal() {
     modalContainer.classList.toggle("active")
-    
+
 }
 
 // AFFICHER PROJETS MODALE//
@@ -32,19 +31,20 @@ fetch("http://localhost:5678/api/works")
     .then((works) => {
 
         console.log(works);
+
         function generateProjets(works) {
             for (let i = 0; i < works.length; i++) {
-        
+
                 const article = works[i];
-                
+
                 const sectionModal = document.querySelector(".modal-contenu");
-                
+
                 const workElement = document.createElement("article");
-                
+
                 const imageUrlElement = document.createElement("img");
                 imageUrlElement.src = article.imageUrl;
                 imageUrlElement.classList.add("projets-modale")
-                
+
                 const divModale = document.createElement("div");
                 divModale.classList.add("corbeille-modale");
 
@@ -59,117 +59,124 @@ fetch("http://localhost:5678/api/works")
                 workElement.appendChild(divModale);
                 divModale.appendChild(imgCorbeille);
                 workElement.appendChild(edit);
-            
-               
-        }}
-// SUPPRIME UN PROJET //
+
+
+            }
+        }
+        // SUPPRIME UN PROJET //
         function deleteProjet() {
 
             for (let i = 0; i < works.length; i++) {
                 var corb = document.getElementsByClassName("corbeille-modale");
-                
-                corb[i].addEventListener("click", function(e){
+
+                corb[i].addEventListener("click", function (e) {
+                    e.preventDefault();
                     console.log("btn clicked");
                     console.log(works[i]);
                     var id = works[i].id;
                     console.log(localStorage.getItem("token"))
-                    e.preventDefault();
+
                     fetch("http://localhost:5678/api/works/" + id, {
-                        method:"DELETE",
-                        headers: {
-                            "Content-type": "application/json",
-                            "Authorization": "Bearer " + localStorage.getItem("token")
-                        }
-                })
-                        .then((reponse)=> reponse.json())
+                            method: "DELETE",
+                            headers: {
+                                "Content-type": "application/json",
+                                "Authorization": "Bearer " + localStorage.getItem("token")
+                            }
+                        })
+                        .then((reponse) => reponse.json())
                         .then((json) => alert("le projet a bien été supprimé"))
-                      
+
                 })
             }
         }
 
         // CHARGER IMAGE MODALE //
-       
 
 
-  const file = document.getElementById("getFile");
-  const preview = document.getElementById("preview");
-  const depop = document.getElementById("depop");
 
-  file.addEventListener("change", function(e) {
-    const file = e.target.files[0];
+        const file = document.getElementById("getFile");
+        const preview = document.getElementById("preview");
+        const depop = document.getElementById("depop");
 
-    const url = URL.createObjectURL(file);
-    preview.src = url;
-    depop.style.display="none";
+        file.addEventListener("change", function (e) {
+            const file = e.target.files[0];
 
-  })
-       
-// AJOUTER UN PROJET //
-        
+            const url = URL.createObjectURL(file);
+            preview.src = url;
+            depop.style.display = "none";
+
+        })
+
+        // AJOUTER UN PROJET //
+
         function addProjet() {
-            
+
             const ajout = document.getElementById("add-modal");
 
-            ajout.addEventListener("click", function() {
-                document.getElementById("modal-rendu").style.display="none";
-                document.getElementById("modal-ajout").style.display="block";                
+            ajout.addEventListener("click", function () {
+                document.getElementById("modal-rendu").style.display = "none";
+                document.getElementById("modal-ajout").style.display = "block";
             })
 
             const retour = document.getElementById("return-modal");
 
-            retour.addEventListener("click", function() {
-                document.getElementById("modal-ajout").style.display="none";
-                document.getElementById("modal-rendu").style.display="block";
+            retour.addEventListener("click", function () {
+                document.getElementById("modal-ajout").style.display = "none";
+                document.getElementById("modal-rendu").style.display = "block";
             })
 
-            const boutonPhoto=document.querySelector("#boutonPhoto")
-            boutonPhoto.addEventListener("click", function(e){
-                e.preventDefault()
-                const image = document.querySelector("#getFile").files[0];
-                console.log(image)
-                const title = document.querySelector("#titre").value
-                const category = parseInt(document.querySelector("#categorie").value)
-
-                const formData = new FormData()
-                formData.append("image", image)
-                formData.append("title", title)
-                formData.append("category", category)
-                console.log(formData)
-                
-                 let reponse = fetch("http://localhost:5678/api/works", {
-                    method:"POST",
-                    headers: {
-                        "Authorization": "Bearer " + localStorage.getItem("token")
-                    },
-                    body : formData
-                }) 
-                .then((response) => response.json())
-                .then((result) => {
-                    console.log("Success:", result);
-                })
-                .catch((error) => {
-                    console.error("Error:", error);
-                });
-                    if (reponse.status === 201){
-                        console.log("Projet Envoyé");
-                    } else {
-                        console.log("Erreur");
-                    }
-            }
-            
-    )}
+            const choisir = document.getElementById("ajouter");
+            choisir.addEventListener("click", function () {
+                const image = document.getElementById("getFile");
+                image.click();
 
 
-                generateProjets(works)
+            })
 
-                deleteProjet() 
+            const boutonPhoto = document.querySelector("#boutonPhoto")
+            boutonPhoto.addEventListener("click", function (e) {
+                    e.preventDefault()
+                    const image = document.querySelector("#getFile").files[0];
+                    console.log(image)
+                    const title = document.querySelector("#titre").value
+                    const category = parseInt(document.querySelector("#categorie").value)
 
-                addProjet()
+                    const formData = new FormData()
+                    formData.append("image", image)
+                    formData.append("title", title)
+                    formData.append("category", category)
+                    console.log(formData)
 
-            
+                    let reponse = fetch("http://localhost:5678/api/works", {
+                            method: "POST",
+                            headers: {
+                                "Authorization": "Bearer " + localStorage.getItem("token")
+                            },
+                            body: formData
+                        })
+                        .then((response) => response.json())
+                        .then((result) => {
+                            console.log("Success:", result);
+                        })
+                        .catch((error) => {
+                            console.error("Error:", error);
+                        });
 
-            });
+                }
+
+            )
+        }
+
+
+        generateProjets(works)
+
+        deleteProjet()
+
+        addProjet()
+
+
+
+    });
 
 
 
@@ -182,99 +189,99 @@ fetch("http://localhost:5678/api/works")
 
         function generateProjets(works) {
             for (let i = 0; i < works.length; i++) {
-    
+
                 const article = works[i];
-                
+
                 const sectionGallery = document.querySelector(".gallery");
-                
+
                 const workElement = document.createElement("article");
-                
+
                 const imageUrlElement = document.createElement("img");
                 imageUrlElement.src = article.imageUrl;
-        
+
                 const titleElement = document.createElement("p");
                 titleElement.innerText = article.title;
-                
+
                 sectionGallery.appendChild(workElement);
                 workElement.appendChild(imageUrlElement);
                 workElement.appendChild(titleElement);
-               
-        }};
+
+            }
+        };
 
         generateProjets(works);
 
-        
-        
-
-        
-
-     //BOUTON TOUS //
-     const boutonTous = document.querySelector(".btn-tous");
-    
-     boutonTous.addEventListener("click", function () {
-         const afficheTous = works.filter(function (work) {
-             return works;
-             
-         })
-      console.log(afficheTous)
-     
-      document.querySelector(".gallery").innerHTML = "";
-     generateProjets(afficheTous)
-     })
 
 
 
-    
-    // BOUTON OBJETS //
-    const boutonObjets = document.querySelector(".btn-objets");
-    
-    boutonObjets.addEventListener("click", function () {
-        const afficheObjets = works.filter(function (work) {
-            return work.categoryId === 1;
-            
+
+
+        //BOUTON TOUS //
+        const boutonTous = document.querySelector(".btn-tous");
+
+        boutonTous.addEventListener("click", function () {
+            const afficheTous = works.filter(function (work) {
+                return works;
+
+            })
+            console.log(afficheTous)
+
+            document.querySelector(".gallery").innerHTML = "";
+            generateProjets(afficheTous)
         })
-     console.log(afficheObjets)
-    
-     document.querySelector(".gallery").innerHTML = "";
-    generateProjets(afficheObjets)
-    })
 
 
 
-    //BOUTON APPARTEMENTS //
 
-    const boutonAppart = document.querySelector(".btn-appart");
-    
-    boutonAppart.addEventListener("click", function () {
-        const afficheAppart = works.filter(function (work) {
-            return work.categoryId === 2;
-            
+        // BOUTON OBJETS //
+        const boutonObjets = document.querySelector(".btn-objets");
+
+        boutonObjets.addEventListener("click", function () {
+            const afficheObjets = works.filter(function (work) {
+                return work.categoryId === 1;
+
+            })
+            console.log(afficheObjets)
+
+            document.querySelector(".gallery").innerHTML = "";
+            generateProjets(afficheObjets)
         })
-     console.log(afficheAppart)
-    
-     document.querySelector(".gallery").innerHTML = "";
-    generateProjets(afficheAppart)
-    })
 
 
 
+        //BOUTON APPARTEMENTS //
 
-    //BOUTON HOTEL & RESTAURANTS //
+        const boutonAppart = document.querySelector(".btn-appart");
 
+        boutonAppart.addEventListener("click", function () {
+            const afficheAppart = works.filter(function (work) {
+                return work.categoryId === 2;
 
-    const boutonHotel = document.querySelector(".btn-hotel");
-    
-    boutonHotel.addEventListener("click", function () {
-        const afficheHotel = works.filter(function (work) {
-            return work.categoryId === 3;
-            
+            })
+            console.log(afficheAppart)
+
+            document.querySelector(".gallery").innerHTML = "";
+            generateProjets(afficheAppart)
         })
-     console.log(afficheHotel)
-    
-     document.querySelector(".gallery").innerHTML = "";
-    generateProjets(afficheHotel)
-    })
 
 
-});
 
+
+        //BOUTON HOTEL & RESTAURANTS //
+
+
+        const boutonHotel = document.querySelector(".btn-hotel");
+
+        boutonHotel.addEventListener("click", function () {
+            const afficheHotel = works.filter(function (work) {
+                return work.categoryId === 3;
+
+            })
+            console.log(afficheHotel)
+
+            document.querySelector(".gallery").innerHTML = "";
+            generateProjets(afficheHotel)
+        })
+
+
+    });
