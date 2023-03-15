@@ -26,8 +26,7 @@ fetch("http://localhost:5678/api/works")
 
             }
 
-            document.querySelector("#gallery").innerHTML = "";
-            refreshProjets(works)
+
         };
 
         generateProjets(works);
@@ -146,7 +145,7 @@ fetch("http://localhost:5678/api/works")
 
         console.log(works);
 
-        function generateProjets(works) {
+        function generateProjetsModale(works) {
             for (let i = 0; i < works.length; i++) {
 
                 const article = works[i];
@@ -187,6 +186,37 @@ fetch("http://localhost:5678/api/works")
                 .then(reponse => reponse.json())
                 .then((works) => {
 
+                    for (let i = 0; i < works.length; i++) {
+
+                        const article = works[i];
+
+                        const sectionModal = document.querySelector(".modal-contenu");
+
+                        const workElement = document.createElement("article");
+
+                        const imageUrlElement = document.createElement("img");
+                        imageUrlElement.src = article.imageUrl;
+                        imageUrlElement.classList.add("projets-modale")
+
+                        const divModale = document.createElement("div");
+                        divModale.classList.add("corbeille-modale");
+
+                        const imgCorbeille = document.createElement("img");
+                        imgCorbeille.src = "./assets/images/Corbeille-Modale.png"
+
+                        const edit = document.createElement("p");
+                        edit.innerText = "éditer";
+
+                        sectionModal.appendChild(workElement);
+                        workElement.appendChild(imageUrlElement);
+                        workElement.appendChild(divModale);
+                        divModale.appendChild(imgCorbeille);
+                        workElement.appendChild(edit);
+
+                    }
+
+
+
                     console.log(works);
 
 
@@ -221,6 +251,10 @@ fetch("http://localhost:5678/api/works")
                         .then((reponse) => reponse.json())
 
                         .then((json) => alert("le projet a bien été supprimé")); {
+
+
+                        document.querySelector(".modal-contenu").innerHTML = "";
+                        refreshProjets(works)
 
 
 
@@ -319,12 +353,8 @@ fetch("http://localhost:5678/api/works")
                             document.getElementById("modal-ajout").style.display = "none";
                             document.getElementById("modal-rendu").style.display = "block";
                             depop.style.display = "block";
-
+                            document.querySelector(".modal-contenu").innerHTML = "";
                             refreshProjets(works)
-
-
-
-
 
                         })
                         .catch((error) => {
@@ -339,12 +369,12 @@ fetch("http://localhost:5678/api/works")
 
 
 
-        generateProjets(works)
+        generateProjetsModale(works)
 
         deleteProjet()
 
         addProjet()
 
-        refreshProjets(works)
+
 
     });
