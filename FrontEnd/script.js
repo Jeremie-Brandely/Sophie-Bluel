@@ -186,25 +186,6 @@ fetch("http://localhost:5678/api/works")
             fetch("http://localhost:5678/api/works")
                 .then(reponse => reponse.json())
                 .then((works) => {
-                    for (let i = 0; i < works.length; i++) {
-
-                        const article = works[i];
-
-                        const sectionGallery = document.querySelector(".gallery");
-
-                        const workElement = document.createElement("article");
-
-                        const imageUrlElement = document.createElement("img");
-                        imageUrlElement.src = article.imageUrl;
-
-                        const titleElement = document.createElement("p");
-                        titleElement.innerText = article.title;
-
-                        sectionGallery.appendChild(workElement);
-                        workElement.appendChild(imageUrlElement);
-                        workElement.appendChild(titleElement);
-
-                    }
 
                     console.log(works);
 
