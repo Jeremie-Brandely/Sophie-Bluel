@@ -561,7 +561,7 @@ label{
 
 #depop {
 	background-color: #E8F1F6;
-	display: block;
+	display: flex;
 	flex-direction: column;
 	align-items: center;
 }
@@ -587,10 +587,7 @@ label{
 	display: none;
 }
 
-#depop {
-	display: flex;
-	flex-direction: column;
-}
+
 
 #ajouter {
 	margin: 5px;
