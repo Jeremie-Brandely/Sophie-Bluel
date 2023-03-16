@@ -177,10 +177,48 @@ fetch("http://localhost:5678/api/works")
             }
         }
 
-        //METTRE A JOUR LES PROJETS//
 
+        //METTRE A JOUR LES PROJETS PAGE PRINCIPALE//
 
         function refreshProjets(works) {
+
+            fetch("http://localhost:5678/api/works")
+                .then(reponse => reponse.json())
+                .then((works) => {
+
+                    for (let i = 0; i < works.length; i++) {
+
+                        const article = works[i];
+
+                        const sectionGallery = document.querySelector(".gallery");
+
+                        const workElement = document.createElement("article");
+
+                        const imageUrlElement = document.createElement("img");
+                        imageUrlElement.src = article.imageUrl;
+
+                        const titleElement = document.createElement("p");
+                        titleElement.innerText = article.title;
+
+                        sectionGallery.appendChild(workElement);
+                        workElement.appendChild(imageUrlElement);
+                        workElement.appendChild(titleElement);
+
+                    }
+
+
+
+                    console.log(works);
+
+
+                })
+        }
+
+
+        //METTRE A JOUR LES PROJETS MODALE//
+
+
+        function refreshModale(works) {
 
             fetch("http://localhost:5678/api/works")
                 .then(reponse => reponse.json())
@@ -239,8 +277,6 @@ fetch("http://localhost:5678/api/works")
                     console.log(works[i]);
                     var id = works[i].id;
 
-
-
                     fetch("http://localhost:5678/api/works/" + id, {
                             method: "DELETE",
                             headers: {
@@ -248,20 +284,16 @@ fetch("http://localhost:5678/api/works")
                                 "Authorization": "Bearer " + localStorage.getItem("token")
                             }
                         })
-                        .then((reponse) => reponse.json())
-
-                        .then((json) => alert("le projet a bien été supprimé")); {
-
+                        .then((reponse) => reponse.json)
+                        .then((json) => console.log("le projet a bien été supprimé")); {
 
                         document.querySelector(".modal-contenu").innerHTML = "";
+                        refreshModale(works);
+                        document.querySelector(".gallery").innerHTML = "";
                         refreshProjets(works)
 
 
-
                     }
-
-
-
                 })
             }
 
@@ -314,6 +346,7 @@ fetch("http://localhost:5678/api/works")
             choisir.addEventListener("click", function () {
                 const image = document.getElementById("getFile");
                 image.click();
+                document.querySelector("img#preview").style.display = "flex";
 
 
             })
@@ -322,10 +355,13 @@ fetch("http://localhost:5678/api/works")
             boutonPhoto.addEventListener("click", function (e) {
                     e.preventDefault()
                     const image = document.querySelector("#getFile").files[0];
-                    console.log(image)
-                    const title = document.querySelector("#titre").value
-                    const category = parseInt(document.querySelector("#categorie").value)
-                    document.formProjet.reset()
+                    console.log(image);
+                    const title = document.querySelector("#titre").value;
+                    const category = parseInt(document.querySelector("#categorie").value);
+                    document.querySelector("img#preview").style.display = "none";
+                    document.formProjet.reset();
+
+
 
 
 
@@ -353,8 +389,14 @@ fetch("http://localhost:5678/api/works")
                             document.getElementById("modal-ajout").style.display = "none";
                             document.getElementById("modal-rendu").style.display = "block";
                             depop.style.display = "block";
+
+
                             document.querySelector(".modal-contenu").innerHTML = "";
+                            refreshModale(works);
+                            document.querySelector(".gallery").innerHTML = "";
                             refreshProjets(works)
+
+
 
                         })
                         .catch((error) => {
