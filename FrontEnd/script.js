@@ -40,7 +40,7 @@ fetch("http://localhost:5678/api/works")
         const boutonTous = document.querySelector(".btn-tous");
 
         boutonTous.addEventListener("click", function () {
-            const afficheTous = works.filter(function (work) {
+            const afficheTous = works.filter(function (works) {
                 return works;
 
             })
@@ -252,7 +252,7 @@ fetch("http://localhost:5678/api/works")
                         workElement.appendChild(edit);
 
                     }
-
+                    deleteProjet(works)
 
 
                     console.log(works);
@@ -266,10 +266,13 @@ fetch("http://localhost:5678/api/works")
 
 
         // SUPPRIME UN PROJET //
-        function deleteProjet() {
-
+        function deleteProjet(works) {
+            console.log("delete")
+            console.log(works)
             for (let i = 0; i < works.length; i++) {
                 var corb = document.getElementsByClassName("corbeille-modale");
+
+
 
                 corb[i].addEventListener("click", function (e) {
                     e.preventDefault();
@@ -333,6 +336,7 @@ fetch("http://localhost:5678/api/works")
             ajout.addEventListener("click", function () {
                 document.getElementById("modal-rendu").style.display = "none";
                 document.getElementById("modal-ajout").style.display = "block";
+                document.getElementById("depop").style.display = "flex";
             })
 
             const retour = document.getElementById("return-modal");
@@ -346,6 +350,8 @@ fetch("http://localhost:5678/api/works")
             choisir.addEventListener("click", function () {
                 const image = document.getElementById("getFile");
                 image.click();
+
+                console.log(getFile.files[0])
                 document.querySelector("img#preview").style.display = "flex";
 
 
@@ -362,14 +368,13 @@ fetch("http://localhost:5678/api/works")
                     document.formProjet.reset();
 
 
-
-
-
                     const formData = new FormData()
                     formData.append("image", image)
                     formData.append("title", title)
                     formData.append("category", category)
                     console.log(formData)
+
+
 
 
                     let reponse = fetch("http://localhost:5678/api/works", {
@@ -413,9 +418,10 @@ fetch("http://localhost:5678/api/works")
 
         generateProjetsModale(works)
 
-        deleteProjet()
+        deleteProjet(works)
 
         addProjet()
+
 
 
 
