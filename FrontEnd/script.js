@@ -336,6 +336,7 @@ fetch("http://localhost:5678/api/works")
                 document.getElementById("modal-rendu").style.display = "none";
                 document.getElementById("modal-ajout").style.display = "block";
                 document.getElementById("depop").style.display = "flex";
+                document.getElementById("error-add").style.display = "none";
             })
 
             const retour = document.getElementById("return-modal");
@@ -356,69 +357,65 @@ fetch("http://localhost:5678/api/works")
 
             const boutonPhoto = document.querySelector("#boutonPhoto")
             boutonPhoto.addEventListener("click", function (e) {
-                e.preventDefault()
-                const image = document.querySelector("#getFile").files[0];
+                    e.preventDefault()
+                    const image = document.querySelector("#getFile").files[0];
 
-                const title = document.querySelector("#titre").value;
+                    const title = document.querySelector("#titre").value;
 
-                const category = parseInt(document.querySelector("#categorie").value);
-
-
-                document.getElementById("preview").removeAttribute("src");
+                    const category = parseInt(document.querySelector("#categorie").value);
 
 
-                document.formProjet.reset();
+                    if (!image || !title || !category) {
+                        console.log(" Erreur : Un des champs n'as pas été saisi")
+                        document.getElementById("error-add").style.display = "flex";
+
+                    } else {
+
+                        const formData = new FormData()
+                        formData.append("image", image)
+                        formData.append("title", title)
+                        formData.append("category", category)
+                        console.log(formData)
+
+                        document.getElementById("preview").removeAttribute("src");
+                        document.formProjet.reset();
 
 
+                        let reponse = fetch("http://localhost:5678/api/works", {
+                                method: "POST",
+                                headers: {
+                                    "Authorization": "Bearer " + localStorage.getItem("token")
+                                },
+                                body: formData
+                            })
+                            .then((response) =>
+                                response.json()
 
 
-                const formData = new FormData()
-                formData.append("image", image)
-                formData.append("title", title)
-                formData.append("category", category)
-                console.log(formData)
+                            )
+                            .then((result) => {
+                                console.log("Le projet a bien été ajouté:", result);
+                                document.getElementById("modal-ajout").style.display = "none";
+                                document.getElementById("modal-rendu").style.display = "block";
+                                depop.style.display = "block";
 
 
-
-
-
-
-
-                let reponse = fetch("http://localhost:5678/api/works", {
-                        method: "POST",
-                        headers: {
-                            "Authorization": "Bearer " + localStorage.getItem("token")
-                        },
-                        body: formData
-                    })
-                    .then((response) =>
-                        response.json()
-
-
-                    )
-                    .then((result) => {
-                        console.log("Ajout du projet:", result);
-                        document.getElementById("modal-ajout").style.display = "none";
-                        document.getElementById("modal-rendu").style.display = "block";
-                        depop.style.display = "block";
-
-
-                        document.querySelector(".modal-contenu").innerHTML = "";
-                        refreshModale(works);
-                        document.querySelector(".gallery").innerHTML = "";
-                        refreshProjets(works)
+                                document.querySelector(".modal-contenu").innerHTML = "";
+                                refreshModale(works);
+                                document.querySelector(".gallery").innerHTML = "";
+                                refreshProjets(works)
 
 
 
-                    })
-                    .catch((error) => {
-                        console.error("Error:", error);
-                    });
-            })
+                            })
+                            .catch((error) => {
+                                console.error("Error:", error);
+                            });
+                    }
+                }
+
+            )
         }
-
-
-
 
 
 
