@@ -584,10 +584,13 @@ label{
 }
 
 #getFile {
-	display: none;
+	opacity: 0;
 }
 
-
+#error-add {
+	display: none;
+	color: red;
+}
 
 #ajouter {
 	margin: 5px;
