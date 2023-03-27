@@ -267,7 +267,6 @@ fetch("http://localhost:5678/api/works")
 
         // SUPPRIME UN PROJET //
         function deleteProjet(works) {
-            console.log("delete")
             console.log(works)
             for (let i = 0; i < works.length; i++) {
                 var corb = document.getElementsByClassName("corbeille-modale");
@@ -321,8 +320,6 @@ fetch("http://localhost:5678/api/works")
 
 
 
-
-
         // AJOUTER UN PROJET //
 
 
@@ -332,6 +329,8 @@ fetch("http://localhost:5678/api/works")
         function addProjet() {
 
             const ajout = document.getElementById("add-modal");
+
+            const disparait = document.getElementById("depop");
 
             ajout.addEventListener("click", function () {
                 document.getElementById("modal-rendu").style.display = "none";
@@ -347,71 +346,79 @@ fetch("http://localhost:5678/api/works")
             })
 
             const choisir = document.getElementById("ajouter");
+
             choisir.addEventListener("click", function () {
                 const image = document.getElementById("getFile");
                 image.click();
-
-                console.log(getFile.files[0])
-                document.querySelector("img#preview").style.display = "flex";
 
 
             })
 
             const boutonPhoto = document.querySelector("#boutonPhoto")
             boutonPhoto.addEventListener("click", function (e) {
-                    e.preventDefault()
-                    const image = document.querySelector("#getFile").files[0];
-                    console.log(image);
-                    const title = document.querySelector("#titre").value;
-                    const category = parseInt(document.querySelector("#categorie").value);
-                    document.querySelector("img#preview").style.display = "none";
-                    document.formProjet.reset();
+                e.preventDefault()
+                const image = document.querySelector("#getFile").files[0];
+
+                const title = document.querySelector("#titre").value;
+
+                const category = parseInt(document.querySelector("#categorie").value);
 
 
-                    const formData = new FormData()
-                    formData.append("image", image)
-                    formData.append("title", title)
-                    formData.append("category", category)
-                    console.log(formData)
+                document.getElementById("preview").removeAttribute("src");
+
+
+                document.formProjet.reset();
 
 
 
 
-                    let reponse = fetch("http://localhost:5678/api/works", {
-                            method: "POST",
-                            headers: {
-                                "Authorization": "Bearer " + localStorage.getItem("token")
-                            },
-                            body: formData
-                        })
-                        .then((response) =>
-                            response.json()
-
-
-                        )
-                        .then((result) => {
-                            console.log("Le projet a bien été ajouté:", result);
-                            document.getElementById("modal-ajout").style.display = "none";
-                            document.getElementById("modal-rendu").style.display = "block";
-                            depop.style.display = "block";
-
-
-                            document.querySelector(".modal-contenu").innerHTML = "";
-                            refreshModale(works);
-                            document.querySelector(".gallery").innerHTML = "";
-                            refreshProjets(works)
+                const formData = new FormData()
+                formData.append("image", image)
+                formData.append("title", title)
+                formData.append("category", category)
+                console.log(formData)
 
 
 
-                        })
-                        .catch((error) => {
-                            console.error("Error:", error);
-                        });
 
-                }
 
-            )
+
+
+                let reponse = fetch("http://localhost:5678/api/works", {
+                        method: "POST",
+                        headers: {
+                            "Authorization": "Bearer " + localStorage.getItem("token")
+                        },
+                        body: formData
+                    })
+                    .then((response) =>
+                        response.json()
+
+
+                    )
+                    .then((result) => {
+                        console.log("Ajout du projet:", result);
+                        document.getElementById("modal-ajout").style.display = "none";
+                        document.getElementById("modal-rendu").style.display = "block";
+                        depop.style.display = "block";
+
+
+                        document.querySelector(".modal-contenu").innerHTML = "";
+                        refreshModale(works);
+                        document.querySelector(".gallery").innerHTML = "";
+                        refreshProjets(works)
+
+
+
+                    })
+                    .catch((error) => {
+                        console.error("Error:", error);
+                    });
+            })
         }
+
+
+
 
 
 
